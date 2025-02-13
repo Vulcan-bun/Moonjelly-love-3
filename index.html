@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Jellyfish Love</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('https://www.transparenttextures.com/patterns/dark-denim.png'), linear-gradient(to bottom, #001a33, #004466);
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #66d9ff;
+        }
+        .jellyfish {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            cursor: pointer;
+            animation: float 10s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+        .bubble {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: absolute;
+            animation: rise 6s infinite ease-in;
+        }
+        @keyframes rise {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-300px); opacity: 0; }
+        }
+        #message {
+            font-size: 20px;
+            color: #ffccff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🪼 Floating Love for You 🪼</h1>
+    <p>Click on a Moon Jellyfish for a special love message!</p>
+    <p id="message">💖 Your love note will appear here 💖</p>
+    
+    <audio id="backgroundMusic" src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" autoplay loop></audio>
+    <audio id="popSound" src="https://www.fesliyanstudios.com/play-mp3/4383"></audio>
+    
+    <script>
+        let messages = [
+            "You light up my world like the ocean glows at night 🌊",
+            "You're my moon jelly in a sea of stars ✨",
+            "Every moment with you is a gentle drift into happiness 💕",
+            "You're as mesmerizing as a floating jellyfish in the deep blue sea 🪼",
+            "I love you more than the ocean loves the moon! 🌙💖"
+        ];
+        let jellyfishImages = [
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Download-Image.png",
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Free-Download.png",
+            "https://www.pngarts.com/files/4/Jellyfish-Free-PNG-Image.png"
+        ];
+
+        function createJellyfish() {
+            for (let i = 0; i < 5; i++) { // Creates 5 jellyfish
+                let jelly = document.createElement("img");
+                jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
+                jelly.classList.add("jellyfish");
+                jelly.style.left = Math.random() * window.innerWidth + "px";
+                jelly.style.top = Math.random() * window.innerHeight + "px";
+                jelly.onclick = function() {
+                    let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                    document.getElementById("message").innerText = randomMessage;
+                    document.getElementById("popSound").play();
+                };
+                document.body.appendChild(jelly);
+            }
+        }
+
+        function createBubbles() {
+            for (let i = 0; i < 20; i++) {
+                let bubble = document.createElement("div");
+                bubble.classList.add("bubble");
+                bubble.style.left = Math.random() * window.innerWidth + "px";
+                bubble.style.bottom = "0px";
+                bubble.style.animationDuration = (3 + Math.random() * 3) + "s";
+                document.body.appendChild(bubble);
+            }
+        }
+
+        createJellyfish();
+        createBubbles();
+    </script>
+</body>
+</html>
 
