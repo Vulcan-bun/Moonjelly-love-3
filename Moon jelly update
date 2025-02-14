@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Jellyfish Love</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('https://www.transparenttextures.com/patterns/dark-denim.png'), linear-gradient(to bottom, #000022, #001a33);
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #66d9ff;
+        }
+        .jellyfish {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            cursor: pointer;
+            animation: float 12s infinite ease-in-out;
+            filter: drop-shadow(0px 0px 10px rgba(102, 217, 255, 0.8));
+        }
+        .whale {
+            width: 300px;
+            position: absolute;
+            opacity: 0.6;
+            filter: drop-shadow(0px 0px 15px rgba(102, 217, 255, 0.7));
+            animation: swim 20s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-60px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🪼 Floating Love for You 🪼</h1>
+    <p>Click on a Moon Jellyfish for a special love message!</p>
+    <p id="message">💖 Your love note will appear here 💖</p>
+
+    <audio id="popSound1" src="https://www.fesliyanstudios.com/play-mp3/4383"></audio>
+    <audio id="popSound2" src="https://www.fesliyanstudios.com/play-mp3/4384"></audio>
+    <audio id="popSound3" src="https://www.fesliyanstudios.com/play-mp3/4385"></audio>
+
+    <img src="https://www.pngarts.com/files/4/Whale-PNG-Free-Download.png" class="whale">
+
+    <script>
+        const jellyfishImages = [
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Download-Image.png",
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Free-Download.png",
+            "https://www.pngarts.com/files/4/Jellyfish-Free-PNG-Image.png",
+            "https://www.pngarts.com/files/4/Colorful-Jellyfish-PNG-Download-Image.png",
+            "https://www.pngarts.com/files/4/Purple-Jellyfish-PNG-Transparent-Image.png",
+            "https://www.pngarts.com/files/4/Blue-Jellyfish-PNG-Download-Image.png"
+        ];
+
+    
+    <script>
+        let messages = [
+            "You light up my world like the ocean glows at night 🌊",
+            "You're my moon jelly in a sea of stars ✨",
+            "Every moment with you is a gentle drift into happiness 💕",
+            "You're as mesmerizing as a floating jellyfish in the deep blue sea 🪼",
+            "I love you more than the ocean loves the moon! 🌙💖",
+            "Your kindness is like a warm ocean current, always lifting me up 💙",
+            "Just like a jellyfish, you are magical and mysterious in the best way!",
+            "Drifting through life with you is my favorite adventure 🏝️",
+            "You are my shining pearl in the deep blue sea of life 🐚",
+            "Your love glows brighter than bioluminescent waves at night 🌌",
+            "If I were a jellyfish, I’d float towards you every time 💫",
+            "Your hugs are as soft and comforting as jellyfish tentacles (but less stingy!)",
+            "Like a jellyfish, you make every place more magical just by being there ✨",
+            "No ocean is too deep if I’m floating with you 💙",
+            "If love had a shape, it would be a glowing moon jelly drifting through the night 🌕",
+            "You make even the darkest waters feel warm and safe 🪸",
+            "I’d cross every ocean just to drift beside you 🌊",
+            "Being with you is like floating weightless in the deep blue sea 🐠",
+            "Your heart is like a coral reef—beautiful, full of life, and a home for my love 🩵",
+            "You are my sea breeze on a warm summer night 🌬️",
+            "Every time I see a jellyfish, I think of you and smile 😊",
+            "If we were jellyfish, we’d tangle our tentacles and never let go 💞",
+            "Your love shines brighter than the ocean under a full moon 🌕",
+            "With you, my heart floats effortlessly, just like a jellyfish in a gentle tide 💖",
+            "You and me? Just like the sea and the sky—meant to be together forever 💙",
+            "You are my favorite kind of deep-sea treasure 💎",
+            "My love for you is as endless as the ocean 🌊",
+            "If I had to choose between a million jellyfish and you, I'd still pick you! 💕",
+            "Your love sends the best kind of electric spark through me, just like a glowing jellyfish ⚡"
+        ];
+
+        function spawnJellyfish() {
+            if (document.querySelectorAll('.jellyfish').length < 30) {
+                let jelly = document.createElement("img");
+                jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
+                jelly.classList.add("jellyfish");
+                jelly.style.left = Math.random() * window.innerWidth + "px";
+                jelly.style.top = Math.random() * window.innerHeight + "px";
+                jelly.onclick = function() {
+                    let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                    document.getElementById("message").innerText = randomMessage;
+                    let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
+                    let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                    randomSound.play();
+                };
+                document.body.appendChild(jelly);
+            }
+        }
+
+        createJellyfish();
+    </script>
+</body>
+</html>
