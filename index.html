@@ -98,10 +98,13 @@
             jelly.style.left = Math.random() * window.innerWidth + "px";
             jelly.style.top = Math.random() * window.innerHeight + "px";
             jelly.onclick = function() {
-                let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
-                let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-                randomSound.play();
-            };
+            let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById("message").innerText = randomMessage; // ✅ Updates message!
+    
+            let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
+            let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+            randomSound.play();
+        };
             document.body.appendChild(jelly);
             setTimeout(() => jelly.remove(), 15 * 1000);
         }
