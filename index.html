@@ -98,7 +98,7 @@
             jelly.classList.add("jellyfish");
             jelly.style.left = Math.random() * window.innerWidth + "px";
             jelly.style.top = Math.random() * window.innerHeight + "px";
-function addJellyfishClickEvent(jelly) {
+function addJellyfishClickEvent(jelly) 
     jelly.onclick = function() {
         let randomMessage = messages[Math.floor(Math.random() * messages.length)];
         document.getElementById("message").innerText = randomMessage; // ✅ Updates message
