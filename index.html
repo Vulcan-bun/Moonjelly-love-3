@@ -1,9 +1,88 @@
-function maintainJellyfishCount() {
-    let currentJellyfish = document.querySelectorAll('.jellyfish').length;
-    let jellyfishNeeded = 30 - currentJellyfish;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Jellyfish Love</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('https://i.imgur.com/YOUR_IMAGE.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #66d9ff;
+        }
+        .jellyfish {
+            width: 100px;
+            height: auto;
+            position: absolute;
+            cursor: pointer;
+            animation: float 12s infinite ease-in-out;
+            filter: drop-shadow(0px 0px 10px rgba(102, 217, 255, 0.8));
+        }
+    </style>
+</head>
+<body>
+    <h1>🪼 Floating Love for You 🪼</h1>
+    <p>Click on a Moon Jellyfish for a special love message!</p>
+    <p id="message">💖 Your love note will appear here 💖</p>
 
-    for (let i = 0; i < jellyfishNeeded; i++) {
-        let jelly = createJellyfish();  // ✅ Create new jellyfish
-        addJellyfishClickEvent(jelly);  // ✅ Attach click event to every new jellyfish
-    }
-}
+    <script>
+        const jellyfishImages = [
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Download-Image.png",
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Free-Download.png"
+        ];
+
+        let messages = [
+            "You light up my world like the ocean glows at night 🌊",
+            "You're my moon jelly in a sea of stars ✨"
+        ];
+
+        function addJellyfishClickEvent(jelly) {
+            jelly.onclick = function() {
+                let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                document.getElementById("message").innerText = randomMessage;
+
+                let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
+                let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                randomSound.play();
+
+                jelly.remove();  // ✅ Jellyfish disappears on click
+            };
+        }
+
+        function createJellyfish() {
+            let jelly = document.createElement("img");
+            jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
+            jelly.classList.add("jellyfish");
+            jelly.style.left = Math.random() * window.innerWidth + "px";
+            jelly.style.top = Math.random() * window.innerHeight + "px";
+            
+            addJellyfishClickEvent(jelly);
+            document.body.appendChild(jelly);
+            setTimeout(() => jelly.remove(), 15000);
+            return jelly;
+        }
+
+        function maintainJellyfishCount() {
+            let currentJellyfish = document.querySelectorAll('.jellyfish').length;
+            let jellyfishNeeded = 30 - currentJellyfish;
+
+            for (let i = 0; i < jellyfishNeeded; i++) {
+                let jelly = createJellyfish();
+                addJellyfishClickEvent(jelly);
+            }
+        }
+
+        window.onload = function() {
+            maintainJellyfishCount();  // ✅ Ensures jellyfish appear immediately
+            setInterval(maintainJellyfishCount, 1000);
+        };
+    </script>
+</body>
+</html>
