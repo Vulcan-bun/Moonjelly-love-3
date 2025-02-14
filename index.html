@@ -127,9 +127,12 @@ function maintainJellyfishCount() {
 }
 
         // Spawn 30 jellyfish immediately on page load
-    window.onload = function() {
-           maintainJellyfishCount();  // ✅ Ensures jellyfish are always at 30
-           setInterval(maintainJellyfishCount, 1000);
+window.onload = function() {
+    for (let i = 0; i < 30; i++) {  // ✅ Ensures 30 jellyfish spawn immediately
+        let jelly = createJellyfish();
+        addJellyfishClickEvent(jelly);
+    }
+    setInterval(maintainJellyfishCount, 1000);
 };
 
         // Continuously maintain 30 jellyfish every second
