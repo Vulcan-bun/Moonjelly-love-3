@@ -58,7 +58,7 @@
             "https://www.pngarts.com/files/4/Purple-Jellyfish-PNG-Transparent-Image.png",
             "https://www.pngarts.com/files/4/Blue-Jellyfish-PNG-Download-Image.png"
         ];
-    </script>
+
         let messages = [
             "You light up my world like the ocean glows at night 🌊",
             "You're my moon jelly in a sea of stars ✨",
@@ -97,32 +97,22 @@
             jelly.classList.add("jellyfish");
             jelly.style.left = Math.random() * window.innerWidth + "px";
             jelly.style.top = Math.random() * window.innerHeight + "px";
-            jelly.onclick = function() {
-                let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
-                let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-                randomSound.play();
-            };
             document.body.appendChild(jelly);
             setTimeout(() => jelly.remove(), 15 * 1000);
         }
 
         function maintainJellyfishCount() {
             let currentJellyfish = document.querySelectorAll('.jellyfish').length;
-            let jellyfishNeeded = 30 - currentJellyfish;
-            for (let i = 0; i < jellyfishNeeded; i++) {
+            while (currentJellyfish < 30) {
                 createJellyfish();
+                currentJellyfish++;
             }
         }
 
-        // Spawn 30 jellyfish immediately on page load
-      window.onload = function() {
-        for (let i = 0; i < 30; i++) {
-            createJellyfish();
-          }
+        window.onload = function() {
+            maintainJellyfishCount();
+            setInterval(maintainJellyfishCount, 1000);
         };
-
-        // Continuously maintain 30 jellyfish every second
-        setInterval(maintainJellyfishCount, 1000);
     </script>
 </body>
 </html>
