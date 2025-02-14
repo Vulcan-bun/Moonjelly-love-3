@@ -6,8 +6,9 @@
     <title>Moon Jellyfish Love</title>
     <style>
         body {
-            text-align: center;
-            background: url('https://www.transparenttextures.com/patterns/dark-denim.png'), linear-gradient(to bottom, #000022, #001a33);
+           text-align: center;
+   background: url('https://i.imgur.com/pUDuSWT.png') no-repeat center center fixed;
+   background-size: cover;
             font-family: Arial, sans-serif;
             color: white;
             overflow: hidden;
@@ -58,7 +59,7 @@
             "https://www.pngarts.com/files/4/Purple-Jellyfish-PNG-Transparent-Image.png",
             "https://www.pngarts.com/files/4/Blue-Jellyfish-PNG-Download-Image.png"
         ];
-    </script>
+    
         let messages = [
             "You light up my world like the ocean glows at night 🌊",
             "You're my moon jelly in a sea of stars ✨",
@@ -91,35 +92,48 @@
             "Your love sends the best kind of electric spark through me, just like a glowing jellyfish ⚡"
         ];
 
+     function createJellyfish() {
+    let jelly = document.createElement("img");
+    jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
+    jelly.classList.add("jellyfish");
+    jelly.style.left = Math.random() * window.innerWidth + "px";
+    jelly.style.top = Math.random() * window.innerHeight + "px";
+    
+    addJellyfishClickEvent(jelly); 
+    document.body.appendChild(jelly);
+    setTimeout(() => jelly.remove(), 15000);
+    return jelly; // ✅ Now returns the element properly!
+}
+
         function createJellyfish() {
             let jelly = document.createElement("img");
             jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
             jelly.classList.add("jellyfish");
             jelly.style.left = Math.random() * window.innerWidth + "px";
             jelly.style.top = Math.random() * window.innerHeight + "px";
-            jelly.onclick = function() {
-                let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
-                let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-                randomSound.play();
-            };
+            
+            addJellyfishClickEvent(jelly);
             document.body.appendChild(jelly);
-            setTimeout(() => jelly.remove(), 15 * 1000);
+            setTimeout(() => jelly.remove(), 15000);
+            return jelly;
         }
-
-        function maintainJellyfishCount() {
-            let currentJellyfish = document.querySelectorAll('.jellyfish').length;
-            let jellyfishNeeded = 30 - currentJellyfish;
-            for (let i = 0; i < jellyfishNeeded; i++) {
-                createJellyfish();
-            }
-        }
+function maintainJellyfishCount() {
+    let currentJellyfish = document.querySelectorAll('.jellyfish').length;
+    let jellyfishNeeded = 30 - currentJellyfish;
+    for (let i = 0; i < jellyfishNeeded; i++) {
+        let jelly = createJellyfish(); // ✅ Ensures jellyfish are created
+        addJellyfishClickEvent(jelly); // ✅ Ensures click event is added
+    }
+}
 
         // Spawn 30 jellyfish immediately on page load
-      window.onload = function() {
-        for (let i = 0; i < 30; i++) {
-            createJellyfish();
-          }
-        };
+window.onload = function() {
+    for (let i = 0; i < 30; i++) {  // ✅ Ensures 30 jellyfish spawn immediately
+        let jelly = createJellyfish();
+        addJellyfishClickEvent(jelly);
+    }
+    setInterval(maintainJellyfishCount, 1000);
+};
 
         // Continuously maintain 30 jellyfish every second
         setInterval(maintainJellyfishCount, 1000);
