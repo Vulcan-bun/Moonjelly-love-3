@@ -58,9 +58,7 @@
             "https://www.pngarts.com/files/4/Purple-Jellyfish-PNG-Transparent-Image.png",
             "https://www.pngarts.com/files/4/Blue-Jellyfish-PNG-Download-Image.png"
         ];
-
-    
-    <script>
+    </script>
         let messages = [
             "You light up my world like the ocean glows at night 🌊",
             "You're my moon jelly in a sea of stars ✨",
@@ -117,9 +115,11 @@
         }
 
         // Spawn 30 jellyfish immediately on page load
+      window.onload = function() {
         for (let i = 0; i < 30; i++) {
             createJellyfish();
-        }
+          }
+        };
 
         // Continuously maintain 30 jellyfish every second
         setInterval(maintainJellyfishCount, 1000);
