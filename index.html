@@ -104,6 +104,8 @@
             let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
             let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
             randomSound.play();
+
+            jelly.remove();
         };
             document.body.appendChild(jelly);
             setTimeout(() => jelly.remove(), 15 * 1000);
