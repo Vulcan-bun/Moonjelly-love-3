@@ -93,8 +93,8 @@
             "Your love sends the best kind of electric spark through me, just like a glowing jellyfish ⚡"
         ];
 
-        function createJellyfish() {
-            for (let i = 0; i < 30; i++) {
+        function spawnJellyfish() {
+            if (document.querySelectorAll('.jellyfish').length < 30) {
                 let jelly = document.createElement("img");
                 jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
                 jelly.classList.add("jellyfish");
