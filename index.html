@@ -131,11 +131,15 @@ window.onload = function() {
         let jelly = createJellyfish();
         addJellyfishClickEvent(jelly);
     }
-    setInterval(maintainJellyfishCount, 1000);
-};
+}
 
-        // Continuously maintain 30 jellyfish every second
-        setInterval(maintainJellyfishCount, 1000);
+        document.addEventListener("DOMContentLoaded", function () {  
+            for (let i = 0; i < 30; i++) {  // ✅ Ensures 30 jellyfish spawn immediately
+                let jelly = createJellyfish();
+                addJellyfishClickEvent(jelly);
+            }
+            setInterval(maintainJellyfishCount, 1000);  // ✅ Runs only once
+        });
     </script>
 </body>
 </html>
