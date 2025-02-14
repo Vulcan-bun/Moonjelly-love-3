@@ -93,25 +93,36 @@
             "Your love sends the best kind of electric spark through me, just like a glowing jellyfish ⚡"
         ];
 
-        function spawnJellyfish() {
-            if (document.querySelectorAll('.jellyfish').length < 30) {
-                let jelly = document.createElement("img");
-                jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
-                jelly.classList.add("jellyfish");
-                jelly.style.left = Math.random() * window.innerWidth + "px";
-                jelly.style.top = Math.random() * window.innerHeight + "px";
-                jelly.onclick = function() {
-                    let randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                    document.getElementById("message").innerText = randomMessage;
-                    let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
-                    let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-                    randomSound.play();
-                };
-                document.body.appendChild(jelly);
+        function createJellyfish() {
+            let jelly = document.createElement("img");
+            jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
+            jelly.classList.add("jellyfish");
+            jelly.style.left = Math.random() * window.innerWidth + "px";
+            jelly.style.top = Math.random() * window.innerHeight + "px";
+            jelly.onclick = function() {
+                let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
+                let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                randomSound.play();
+            };
+            document.body.appendChild(jelly);
+            setTimeout(() => jelly.remove(), 15 * 1000);
+        }
+
+        function maintainJellyfishCount() {
+            let currentJellyfish = document.querySelectorAll('.jellyfish').length;
+            let jellyfishNeeded = 30 - currentJellyfish;
+            for (let i = 0; i < jellyfishNeeded; i++) {
+                createJellyfish();
             }
         }
 
-        createJellyfish();
+        // Spawn 30 jellyfish immediately on page load
+        for (let i = 0; i < 30; i++) {
+            createJellyfish();
+        }
+
+        // Continuously maintain 30 jellyfish every second
+        setInterval(maintainJellyfishCount, 1000);
     </script>
 </body>
 </html>
