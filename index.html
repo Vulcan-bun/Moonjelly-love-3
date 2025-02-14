@@ -6,9 +6,9 @@
     <title>Moon Jellyfish Love</title>
     <style>
         body {
-            text-align: center;
-            background: url('https://i.imgur.com/YOUR_IMAGE.png') no-repeat center center fixed;
-            background-size: cover;
+           text-align: center;
+   background: url('https://i.imgur.com/pUDuSWT.png') no-repeat center center fixed;
+   background-size: cover;
             font-family: Arial, sans-serif;
             color: white;
             overflow: hidden;
@@ -25,6 +25,18 @@
             animation: float 12s infinite ease-in-out;
             filter: drop-shadow(0px 0px 10px rgba(102, 217, 255, 0.8));
         }
+        .whale {
+            width: 300px;
+            position: absolute;
+            opacity: 0.6;
+            filter: drop-shadow(0px 0px 15px rgba(102, 217, 255, 0.7));
+            animation: swim 20s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-60px); }
+            100% { transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -32,29 +44,66 @@
     <p>Click on a Moon Jellyfish for a special love message!</p>
     <p id="message">💖 Your love note will appear here 💖</p>
 
+    <audio id="popSound1" src="https://www.fesliyanstudios.com/play-mp3/4383"></audio>
+    <audio id="popSound2" src="https://www.fesliyanstudios.com/play-mp3/4384"></audio>
+    <audio id="popSound3" src="https://www.fesliyanstudios.com/play-mp3/4385"></audio>
+
+    <img src="https://www.pngarts.com/files/4/Whale-PNG-Free-Download.png" class="whale">
+
     <script>
         const jellyfishImages = [
             "https://www.pngarts.com/files/4/Jellyfish-PNG-Download-Image.png",
-            "https://www.pngarts.com/files/4/Jellyfish-PNG-Free-Download.png"
+            "https://www.pngarts.com/files/4/Jellyfish-PNG-Free-Download.png",
+            "https://www.pngarts.com/files/4/Jellyfish-Free-PNG-Image.png",
+            "https://www.pngarts.com/files/4/Colorful-Jellyfish-PNG-Download-Image.png",
+            "https://www.pngarts.com/files/4/Purple-Jellyfish-PNG-Transparent-Image.png",
+            "https://www.pngarts.com/files/4/Blue-Jellyfish-PNG-Download-Image.png"
         ];
-
+    
         let messages = [
             "You light up my world like the ocean glows at night 🌊",
-            "You're my moon jelly in a sea of stars ✨"
+            "You're my moon jelly in a sea of stars ✨",
+            "Every moment with you is a gentle drift into happiness 💕",
+            "You're as mesmerizing as a floating jellyfish in the deep blue sea 🪼",
+            "I love you more than the ocean loves the moon! 🌙💖",
+            "Your kindness is like a warm ocean current, always lifting me up 💙",
+            "Just like a jellyfish, you are magical and mysterious in the best way!",
+            "Drifting through life with you is my favorite adventure 🏝️",
+            "You are my shining pearl in the deep blue sea of life 🐚",
+            "Your love glows brighter than bioluminescent waves at night 🌌",
+            "If I were a jellyfish, I’d float towards you every time 💫",
+            "Your hugs are as soft and comforting as jellyfish tentacles (but less stingy!)",
+            "Like a jellyfish, you make every place more magical just by being there ✨",
+            "No ocean is too deep if I’m floating with you 💙",
+            "If love had a shape, it would be a glowing moon jelly drifting through the night 🌕",
+            "You make even the darkest waters feel warm and safe 🪸",
+            "I’d cross every ocean just to drift beside you 🌊",
+            "Being with you is like floating weightless in the deep blue sea 🐠",
+            "Your heart is like a coral reef—beautiful, full of life, and a home for my love 🩵",
+            "You are my sea breeze on a warm summer night 🌬️",
+            "Every time I see a jellyfish, I think of you and smile 😊",
+            "If we were jellyfish, we’d tangle our tentacles and never let go 💞",
+            "Your love shines brighter than the ocean under a full moon 🌕",
+            "With you, my heart floats effortlessly, just like a jellyfish in a gentle tide 💖",
+            "You and me? Just like the sea and the sky—meant to be together forever 💙",
+            "You are my favorite kind of deep-sea treasure 💎",
+            "My love for you is as endless as the ocean 🌊",
+            "If I had to choose between a million jellyfish and you, I'd still pick you! 💕",
+            "Your love sends the best kind of electric spark through me, just like a glowing jellyfish ⚡"
         ];
 
-        function addJellyfishClickEvent(jelly) {
-            jelly.onclick = function() {
-                let randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                document.getElementById("message").innerText = randomMessage;
-
-                let sounds = [document.getElementById("popSound1"), document.getElementById("popSound2"), document.getElementById("popSound3")];
-                let randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-                randomSound.play();
-
-                jelly.remove();  // ✅ Jellyfish disappears on click
-            };
-        }
+     function createJellyfish() {
+    let jelly = document.createElement("img");
+    jelly.src = jellyfishImages[Math.floor(Math.random() * jellyfishImages.length)];
+    jelly.classList.add("jellyfish");
+    jelly.style.left = Math.random() * window.innerWidth + "px";
+    jelly.style.top = Math.random() * window.innerHeight + "px";
+    
+    addJellyfishClickEvent(jelly); 
+    document.body.appendChild(jelly);
+    setTimeout(() => jelly.remove(), 15000);
+    return jelly; // ✅ Now returns the element properly!
+}
 
         function createJellyfish() {
             let jelly = document.createElement("img");
@@ -68,21 +117,26 @@
             setTimeout(() => jelly.remove(), 15000);
             return jelly;
         }
+function maintainJellyfishCount() {
+    let currentJellyfish = document.querySelectorAll('.jellyfish').length;
+    let jellyfishNeeded = 30 - currentJellyfish;
+    for (let i = 0; i < jellyfishNeeded; i++) {
+        let jelly = createJellyfish(); // ✅ Ensures jellyfish are created
+        addJellyfishClickEvent(jelly); // ✅ Ensures click event is added
+    }
+}
 
-        function maintainJellyfishCount() {
-            let currentJellyfish = document.querySelectorAll('.jellyfish').length;
-            let jellyfishNeeded = 30 - currentJellyfish;
+        // Spawn 30 jellyfish immediately on page load
+window.onload = function() {
+    for (let i = 0; i < 30; i++) {  // ✅ Ensures 30 jellyfish spawn immediately
+        let jelly = createJellyfish();
+        addJellyfishClickEvent(jelly);
+    }
+    setInterval(maintainJellyfishCount, 1000);
+};
 
-            for (let i = 0; i < jellyfishNeeded; i++) {
-                let jelly = createJellyfish();
-                addJellyfishClickEvent(jelly);
-            }
-        }
-
-        window.onload = function() {
-            maintainJellyfishCount();  // ✅ Ensures jellyfish appear immediately
-            setInterval(maintainJellyfishCount, 1000);
-        };
+        // Continuously maintain 30 jellyfish every second
+        setInterval(maintainJellyfishCount, 1000);
     </script>
 </body>
 </html>
